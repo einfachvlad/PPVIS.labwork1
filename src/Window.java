@@ -1,9 +1,7 @@
 import javax.swing.*;
 import javax.swing.border.*;
-import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
-import java.util.List;
 
 public class Window extends JFrame {
     private Box mainBox;
@@ -14,17 +12,17 @@ public class Window extends JFrame {
     Window() {
         super("Лабораторная работа 1");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        main();
+        components();
         pack();
         setVisible(true);
     }
 
-    void main() {
+   private void components() {
         mainBox = Box.createVerticalBox();
-        Component1();
-        Component2();
-        Component3();
-        Component4();
+        component1();
+        component2();
+        component3();
+        component4();
         mainBox.add(box1);
         mainBox.add(Box.createHorizontalStrut(12));
         mainBox.add(box2);
@@ -35,7 +33,7 @@ public class Window extends JFrame {
         setContentPane(mainBox);
     }
 
-    private void Component1() {
+    private void component1() {
         box1 = Box.createHorizontalBox();
         box1.setBorder(new TitledBorder("1-ая группа компонентов"));
         JTextField textField1 = new JTextField(15);
@@ -69,7 +67,7 @@ public class Window extends JFrame {
         box1.add(button1);
     }
 
-    private void Component2() {
+    private void component2() {
         box2 = Box.createHorizontalBox();
         box2.setBorder(new TitledBorder("2-ая группа компонентов"));
         JTextField textField2 = new JTextField(15);
@@ -98,7 +96,7 @@ public class Window extends JFrame {
         box2.add(button2);
     }
 
-    private void Component3(){
+    private void component3(){
         box3 = Box.createHorizontalBox();
         box3.setBorder(new TitledBorder("3-ая группа компонентов"));
         JTextField textField = new JTextField(10);
@@ -111,7 +109,6 @@ public class Window extends JFrame {
         buttonGroup.add(radioButton2);
         buttonGroup.add(radioButton3);
         button1.addActionListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent e) {
                 if(textField.getText().equals("RadioButton1"))
                     radioButton1.setSelected(true);
@@ -131,7 +128,8 @@ public class Window extends JFrame {
         box3.add(radioButton3);
 
     }
-    private void Component4(){
+
+    private void component4(){
         box4 = Box.createHorizontalBox();
         box4.setBorder(new TitledBorder("4-ая группа компонентов"));
         JTextField textField = new JTextField(10);
@@ -140,7 +138,6 @@ public class Window extends JFrame {
         JCheckBox checkBox2=new JCheckBox("CheckBox2");
         JCheckBox checkBox3=new JCheckBox("CheckBox3");
         button1.addActionListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent e) {
                 if(textField.getText().equals("CheckBox1"))
                     checkBox1.setSelected(true);
