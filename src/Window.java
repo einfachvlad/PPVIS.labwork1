@@ -3,18 +3,19 @@ import javax.swing.border.*;
 import java.awt.event.*;
 import java.util.*;
 
-public class Window extends JFrame {
+public class Window {
+    JFrame window;
     private Box mainBox;
     private Box box1;
     private Box box2;
     private Box box3;
     private Box box4;
     Window() {
-        super("Лабораторная работа 1");
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        window=new JFrame("Лабораторная работа 1");
+        window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         components();
-        pack();
-        setVisible(true);
+        window.pack();
+        window.setVisible(true);
     }
 
    private void components() {
@@ -30,7 +31,7 @@ public class Window extends JFrame {
         mainBox.add(box3);
         mainBox.add(Box.createHorizontalStrut(12));
         mainBox.add(box4);
-        setContentPane(mainBox);
+        window.setContentPane(mainBox);
     }
 
     private void component1() {
