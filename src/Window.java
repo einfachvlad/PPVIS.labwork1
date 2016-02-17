@@ -1,7 +1,10 @@
 import javax.swing.*;
 import javax.swing.border.*;
+import javax.swing.table.*;
+import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
+import java.util.List;
 
 public class Window {
     JFrame window;
@@ -10,6 +13,9 @@ public class Window {
     private Box box2;
     private Box box3;
     private Box box4;
+    private Box box5;
+    int rowSize=1;
+    final int columnSize=2;
     Window() {
         window=new JFrame("Лабораторная работа 1");
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -24,6 +30,7 @@ public class Window {
         component2();
         component3();
         component4();
+        component5();
         mainBox.add(box1);
         mainBox.add(Box.createHorizontalStrut(12));
         mainBox.add(box2);
@@ -31,6 +38,8 @@ public class Window {
         mainBox.add(box3);
         mainBox.add(Box.createHorizontalStrut(12));
         mainBox.add(box4);
+        mainBox.add(Box.createHorizontalStrut(12));
+        mainBox.add(box5);
         window.setContentPane(mainBox);
     }
 
@@ -72,8 +81,8 @@ public class Window {
         box2 = Box.createHorizontalBox();
         box2.setBorder(new TitledBorder("2-ая группа компонентов"));
         JTextField textField2 = new JTextField(15);
-        JButton button1 = new JButton("Кнопка 1");
-        JButton button2 = new JButton("Кнопка 2");
+        JButton button1 = new JButton("Назвать другую кнопку");
+        JButton button2 = new JButton("Инверсия");
         button1.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent event) {
@@ -156,6 +165,67 @@ public class Window {
         box4.add(checkBox1);
         box4.add(checkBox2);
         box4.add(checkBox3);
+
+    }
+
+    private void component5(){
+        box5 = Box.createVerticalBox();
+        Box box51=Box.createHorizontalBox();
+        Box box52=Box.createHorizontalBox();
+        box5.setBorder(new TitledBorder("5-ая группа компонентов"));
+        JTextField textField = new JTextField(10);
+        JButton button1 = new JButton("Занести");
+        JButton button2 = new JButton("Перенести в В");
+        JButton button3 = new JButton("Перенести в А");
+        DefaultTableModel model = new DefaultTableModel(rowSize,columnSize);
+        JTable table=new JTable(model);
+        Dimension dimension=new Dimension(box52.getWidth(),table.getRowHeight()*5);
+       // table.setMinimumSize(dimension);
+        button1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                table.setValueAt(textField.getText(),rowSize-1,0);
+                textField.setText("");
+                model.addRow(new Object[]{"",""});
+                rowSize++;
+            }
+        });
+        button2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int[] selectedRows=table.getSelectedRows();
+                for(int row=0;row<selectedRows.length;row++)
+                {
+                    table.setValueAt(table.getValueAt(selectedRows[row],0),selectedRows[row],1);
+                    table.setValueAt("",selectedRows[row],0);
+                }
+
+            }
+        });
+        button3.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int[] selectedRows=table.getSelectedRows();
+                for(int row=0;row<selectedRows.length;row++)
+                {
+                    table.setValueAt(table.getValueAt(selectedRows[row],1),selectedRows[row],0);
+                    table.setValueAt("",selectedRows[row],1);
+                }
+
+            }
+        });
+        box51.add(textField);
+        box51.add(Box.createHorizontalStrut(6));
+        box51.add(button1);
+        box51.add(Box.createHorizontalStrut(6));
+        box51.add(button2);
+        box51.add(Box.createHorizontalStrut(6));
+        box51.add(button3);
+        box51.add(Box.createHorizontalStrut(6));
+        box5.add(box51);
+        box5.add(Box.createVerticalStrut(6));
+        JScrollPane scrollPane=new JScrollPane(table);
+        scrollPane.setPreferredSize(dimension);
+        box52.add(scrollPane);
+        box5.add(box52);
+
 
     }
 }
