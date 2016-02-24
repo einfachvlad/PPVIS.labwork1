@@ -111,20 +111,20 @@ public class Window {
         box3.setBorder(new TitledBorder("3-ая группа компонентов"));
         JTextField textField = new JTextField(10);
         JButton button1 = new JButton("Выбрать");
-        JRadioButton radioButton1=new JRadioButton("RadioButton1");
-        JRadioButton radioButton2=new JRadioButton("RadioButton2");
-        JRadioButton radioButton3=new JRadioButton("RadioButton3");
+        JRadioButton radioButton1=new JRadioButton("1");
+        JRadioButton radioButton2=new JRadioButton("2");
+        JRadioButton radioButton3=new JRadioButton("3");
         ButtonGroup buttonGroup=new ButtonGroup();
         buttonGroup.add(radioButton1);
         buttonGroup.add(radioButton2);
         buttonGroup.add(radioButton3);
         button1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if(textField.getText().equals("RadioButton1"))
+                if(textField.getText().equals("1"))
                     radioButton1.setSelected(true);
-                else if (textField.getText().equals("RadioButton2"))
+                else if (textField.getText().equals("2"))
                     radioButton2.setSelected(true);
-                else if (textField.getText().equals("RadioButton3"))
+                else if (textField.getText().equals("3"))
                     radioButton3.setSelected(true);
                 else JOptionPane.showMessageDialog(button1, "Нет такого переключателя", "Информация", JOptionPane.ERROR_MESSAGE);
             }
@@ -144,17 +144,28 @@ public class Window {
         box4.setBorder(new TitledBorder("4-ая группа компонентов"));
         JTextField textField = new JTextField(10);
         JButton button1 = new JButton("Выбрать");
-        JCheckBox checkBox1=new JCheckBox("CheckBox1");
-        JCheckBox checkBox2=new JCheckBox("CheckBox2");
-        JCheckBox checkBox3=new JCheckBox("CheckBox3");
+        JCheckBox checkBox1=new JCheckBox("1");
+        JCheckBox checkBox2=new JCheckBox("2");
+        JCheckBox checkBox3=new JCheckBox("3");
         button1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if(textField.getText().equals("CheckBox1"))
-                    checkBox1.setSelected(true);
-                else if (textField.getText().equals("CheckBox2"))
-                    checkBox2.setSelected(true);
-                else if (textField.getText().equals("CheckBox3"))
-                    checkBox3.setSelected(true);
+                if(textField.getText().equals("1")) {
+                    if(checkBox1.isSelected())
+                        checkBox1.setSelected(false);
+                    else checkBox1.setSelected(true);
+                }
+                else if (textField.getText().equals("2"))
+                {
+                    if(checkBox2.isSelected())
+                        checkBox2.setSelected(false);
+                    else checkBox2.setSelected(true);
+                }
+                else if (textField.getText().equals("3"))
+                {
+                    if(checkBox3.isSelected())
+                        checkBox3.setSelected(false);
+                    else checkBox3.setSelected(true);
+                }
                 else JOptionPane.showMessageDialog(button1, "Нет такого флажка", "Информация", JOptionPane.ERROR_MESSAGE);
             }
         });
