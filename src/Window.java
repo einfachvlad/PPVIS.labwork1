@@ -14,17 +14,18 @@ public class Window {
     private Box box3;
     private Box box4;
     private Box box5;
-    int rowSize=1;
-    final int columnSize=2;
+    int rowSize = 1;
+    final int columnSize = 2;
+
     Window() {
-        window=new JFrame("Лабораторная работа 1");
+        window = new JFrame("Лабораторная работа 1");
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         components();
         window.pack();
         window.setVisible(true);
     }
 
-   private void components() {
+    private void components() {
         mainBox = Box.createVerticalBox();
         component1();
         component2();
@@ -106,27 +107,28 @@ public class Window {
         box2.add(button2);
     }
 
-    private void component3(){
+    private void component3() {
         box3 = Box.createHorizontalBox();
         box3.setBorder(new TitledBorder("3-ая группа компонентов"));
         JTextField textField = new JTextField(10);
         JButton button1 = new JButton("Выбрать");
-        JRadioButton radioButton1=new JRadioButton("1");
-        JRadioButton radioButton2=new JRadioButton("2");
-        JRadioButton radioButton3=new JRadioButton("3");
-        ButtonGroup buttonGroup=new ButtonGroup();
+        JRadioButton radioButton1 = new JRadioButton("1");
+        JRadioButton radioButton2 = new JRadioButton("2");
+        JRadioButton radioButton3 = new JRadioButton("3");
+        ButtonGroup buttonGroup = new ButtonGroup();
         buttonGroup.add(radioButton1);
         buttonGroup.add(radioButton2);
         buttonGroup.add(radioButton3);
         button1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if(textField.getText().equals("1"))
+                if (textField.getText().equals("1"))
                     radioButton1.setSelected(true);
                 else if (textField.getText().equals("2"))
                     radioButton2.setSelected(true);
                 else if (textField.getText().equals("3"))
                     radioButton3.setSelected(true);
-                else JOptionPane.showMessageDialog(button1, "Нет такого переключателя", "Информация", JOptionPane.ERROR_MESSAGE);
+                else
+                    JOptionPane.showMessageDialog(button1, "Нет такого переключателя", "Информация", JOptionPane.ERROR_MESSAGE);
             }
         });
         box3.add(textField);
@@ -139,34 +141,24 @@ public class Window {
 
     }
 
-    private void component4(){
+    private void component4() {
         box4 = Box.createHorizontalBox();
         box4.setBorder(new TitledBorder("4-ая группа компонентов"));
         JTextField textField = new JTextField(10);
         JButton button1 = new JButton("Выбрать");
-        JCheckBox checkBox1=new JCheckBox("1");
-        JCheckBox checkBox2=new JCheckBox("2");
-        JCheckBox checkBox3=new JCheckBox("3");
+        JCheckBox checkBox1 = new JCheckBox("1");
+        JCheckBox checkBox2 = new JCheckBox("2");
+        JCheckBox checkBox3 = new JCheckBox("3");
         button1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if(textField.getText().equals("1")) {
-                    if(checkBox1.isSelected())
-                        checkBox1.setSelected(false);
-                    else checkBox1.setSelected(true);
-                }
-                else if (textField.getText().equals("2"))
-                {
-                    if(checkBox2.isSelected())
-                        checkBox2.setSelected(false);
-                    else checkBox2.setSelected(true);
-                }
-                else if (textField.getText().equals("3"))
-                {
-                    if(checkBox3.isSelected())
-                        checkBox3.setSelected(false);
-                    else checkBox3.setSelected(true);
-                }
-                else JOptionPane.showMessageDialog(button1, "Нет такого флажка", "Информация", JOptionPane.ERROR_MESSAGE);
+                if (textField.getText().equals("1"))
+                   checkBox1.setSelected(!checkBox1.isSelected());
+                 else if (textField.getText().equals("2"))
+                    checkBox2.setSelected(!checkBox2.isSelected());
+                 else if (textField.getText().equals("3"))
+                    checkBox3.setSelected(!checkBox3.isSelected());
+                else
+                    JOptionPane.showMessageDialog(button1, "Нет такого флажка", "Информация", JOptionPane.ERROR_MESSAGE);
             }
         });
         box4.add(textField);
@@ -179,45 +171,43 @@ public class Window {
 
     }
 
-    private void component5(){
+    private void component5() {
         box5 = Box.createVerticalBox();
-        Box box51=Box.createHorizontalBox();
-        Box box52=Box.createHorizontalBox();
+        Box box51 = Box.createHorizontalBox();
+        Box box52 = Box.createHorizontalBox();
         box5.setBorder(new TitledBorder("5-ая группа компонентов"));
         JTextField textField = new JTextField(10);
         JButton button1 = new JButton("Занести");
         JButton button2 = new JButton("Перенести в В");
         JButton button3 = new JButton("Перенести в А");
-        DefaultTableModel model = new DefaultTableModel(rowSize,columnSize);
-        JTable table=new JTable(model);
-        Dimension dimension=new Dimension(box52.getWidth(),table.getRowHeight()*5);
-       // table.setMinimumSize(dimension);
+        DefaultTableModel model = new DefaultTableModel(rowSize, columnSize);
+        JTable table = new JTable(model);
+        Dimension dimension = new Dimension(box52.getWidth(), table.getRowHeight() * 5);
+        // table.setMinimumSize(dimension);
         button1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                table.setValueAt(textField.getText(),rowSize-1,0);
+                table.setValueAt(textField.getText(), rowSize - 1, 0);
                 textField.setText("");
-                model.addRow(new Object[]{"",""});
+                model.addRow(new Object[]{"", ""});
                 rowSize++;
             }
         });
         button2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                int[] selectedRows=table.getSelectedRows();
-                for(int row=0;row<selectedRows.length;row++)
-                {
-                    table.setValueAt(table.getValueAt(selectedRows[row],0),selectedRows[row],1);
-                    table.setValueAt("",selectedRows[row],0);
+                int[] selectedRows = table.getSelectedRows();
+                for (int row = 0; row < selectedRows.length; row++) {
+                    table.setValueAt(table.getValueAt(selectedRows[row], 0), selectedRows[row], 1);
+                    table.setValueAt("", selectedRows[row], 0);
                 }
 
             }
         });
         button3.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                int[] selectedRows=table.getSelectedRows();
-                for(int row=0;row<selectedRows.length;row++)
-                {
-                    table.setValueAt(table.getValueAt(selectedRows[row],1),selectedRows[row],0);
-                    table.setValueAt("",selectedRows[row],1);
+                int[] selectedRows = table.getSelectedRows();
+                for (int row = 0; row < selectedRows.length; row++) {
+                    table.setValueAt(table.getValueAt(selectedRows[row], 1), selectedRows[row], 0);
+                    table.setValueAt("", selectedRows[row], 1);
                 }
 
             }
@@ -232,7 +222,7 @@ public class Window {
         box51.add(Box.createHorizontalStrut(6));
         box5.add(box51);
         box5.add(Box.createVerticalStrut(6));
-        JScrollPane scrollPane=new JScrollPane(table);
+        JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setPreferredSize(dimension);
         box52.add(scrollPane);
         box5.add(box52);
