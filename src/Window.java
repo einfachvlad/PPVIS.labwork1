@@ -8,7 +8,13 @@ import java.util.List;
 
 public class Window {
     JFrame window;
+    Box boxOfComponent1;
+    Box boxOfComponent2;
+    Box boxOfComponent3;
+    Box boxOfComponent4;
+    Box box51;
     int rowSize = 1;
+
     Window() {
         window = new JFrame("Лабораторная работа 1");
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -28,11 +34,13 @@ public class Window {
         mainBox.add(component4());
         mainBox.add(Box.createHorizontalStrut(12));
         mainBox.add(component5());
+        mainBox.add(extraThing());
+
         window.setContentPane(mainBox);
     }
 
     private Box component1() {
-        Box boxOfComponent1 = Box.createHorizontalBox();
+         boxOfComponent1 = Box.createHorizontalBox();
         boxOfComponent1.setBorder(new TitledBorder("1-ая группа компонентов"));
         JTextField input = new JTextField(15);
         JComboBox comboBoxOfComponent1 = new JComboBox();
@@ -67,7 +75,7 @@ public class Window {
     }
 
     private Box component2() {
-        Box boxOfComponent2 = Box.createHorizontalBox();
+        boxOfComponent2 = Box.createHorizontalBox();
         boxOfComponent2.setBorder(new TitledBorder("2-ая группа компонентов"));
         JTextField input = new JTextField(15);
         JButton name = new JButton("Назвать другую кнопку");
@@ -97,8 +105,8 @@ public class Window {
     }
 
     private Box component3() {
-        Box box3 = Box.createHorizontalBox();
-        box3.setBorder(new TitledBorder("3-ая группа компонентов"));
+        boxOfComponent3 = Box.createHorizontalBox();
+        boxOfComponent3.setBorder(new TitledBorder("3-ая группа компонентов"));
         JTextField input = new JTextField(10);
         JRadioButton radioButton1 = new JRadioButton("1");
         JRadioButton radioButton2 = new JRadioButton("2");
@@ -120,19 +128,19 @@ public class Window {
                     JOptionPane.showMessageDialog(choose, "Нет такого переключателя", "Информация", JOptionPane.ERROR_MESSAGE);
             }
         });
-        box3.add(input);
-        box3.add(Box.createHorizontalStrut(6));
-        box3.add(choose);
-        box3.add(Box.createHorizontalStrut(6));
-        box3.add(radioButton1);
-        box3.add(radioButton2);
-        box3.add(radioButton3);
-        return box3;
+        boxOfComponent3.add(input);
+        boxOfComponent3.add(Box.createHorizontalStrut(6));
+        boxOfComponent3.add(choose);
+        boxOfComponent3.add(Box.createHorizontalStrut(6));
+        boxOfComponent3.add(radioButton1);
+        boxOfComponent3.add(radioButton2);
+        boxOfComponent3.add(radioButton3);
+        return boxOfComponent3;
     }
 
     private Box component4() {
-        Box box4 = Box.createHorizontalBox();
-        box4.setBorder(new TitledBorder("4-ая группа компонентов"));
+        boxOfComponent4 = Box.createHorizontalBox();
+        boxOfComponent4.setBorder(new TitledBorder("4-ая группа компонентов"));
         JTextField input = new JTextField(10);
         JCheckBox checkBox1 = new JCheckBox("1");
         JCheckBox checkBox2 = new JCheckBox("2");
@@ -150,21 +158,21 @@ public class Window {
                     JOptionPane.showMessageDialog(choose, "Нет такого флажка", "Информация", JOptionPane.ERROR_MESSAGE);
             }
         });
-        box4.add(input);
-        box4.add(Box.createHorizontalStrut(6));
-        box4.add(choose);
-        box4.add(Box.createHorizontalStrut(6));
-        box4.add(checkBox1);
-        box4.add(checkBox2);
-        box4.add(checkBox3);
-        return box4;
+        boxOfComponent4.add(input);
+        boxOfComponent4.add(Box.createHorizontalStrut(6));
+        boxOfComponent4.add(choose);
+        boxOfComponent4.add(Box.createHorizontalStrut(6));
+        boxOfComponent4.add(checkBox1);
+        boxOfComponent4.add(checkBox2);
+        boxOfComponent4.add(checkBox3);
+        return boxOfComponent4;
     }
 
     private Box component5() {
-        Box box5 = Box.createVerticalBox();
-        Box box51 = Box.createHorizontalBox();
+        Box boxOfComponent5 = Box.createVerticalBox();
+        box51 = Box.createHorizontalBox();
         Box box52 = Box.createHorizontalBox();
-        box5.setBorder(new TitledBorder("5-ая группа компонентов"));
+        boxOfComponent5.setBorder(new TitledBorder("5-ая группа компонентов"));
         DefaultTableModel model = new DefaultTableModel(rowSize, 2);
         JTable table = new JTable(model);
         Dimension dimension = new Dimension(box52.getWidth(), table.getRowHeight() * 5);
@@ -213,29 +221,63 @@ public class Window {
         box51.add(Box.createHorizontalStrut(6));
         box51.add(toA);
         box51.add(Box.createHorizontalStrut(6));
-        box5.add(box51);
-        box5.add(Box.createVerticalStrut(6));
+        boxOfComponent5.add(box51);
+        boxOfComponent5.add(Box.createVerticalStrut(6));
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setPreferredSize(dimension);
         box52.add(scrollPane);
-        box5.add(box52);
-        return box5;
+        boxOfComponent5.add(box52);
+        return boxOfComponent5;
     }
-//нужно сделать карусель компонентов в группах: старт - запуск карусели, конец - остановить
-   /* private void extraThing(){
-        JButton startButton = new JButton();
-        JButton stopButton = new JButton();
+
+    //нужно сделать карусель компонентов в группах: старт - запуск карусели, конец - остановить
+    private Box extraThing() {
+        Box buttons = Box.createHorizontalBox();
+        JButton startButton = new JButton("Старт");
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                for(int current=1,previous=0;;current){
+               /* for (int current = 1, previous = 0; ; current++) {
+
                     box1.add(textFieldOfComponent1);
                     box1.add(Box.createHorizontalStrut(6));
                     box1.add(comboBoxOfComponent1);
                     box1.add(Box.createHorizontalStrut(6));
                     box1.add(addOfComponent1);
+                }*/
+                Container[] boxes = {boxOfComponent1,boxOfComponent2,boxOfComponent3,boxOfComponent4,box51};
+                for (Container box : boxes)
+                {
+                Component[] components = box.getComponents();
+                box.removeAll();
+                for(int current=0,next=1;next<components.length;current++,next++)
+                { Component temp = components[current];
+                    components[current] = components[next];
+                    components[next] = temp;
                 }
+                for (Component comp : components) {
+                    box.add(comp);
+                }
+                box.validate();
+                }
+                /*box.
+                box.add(box.getComponent(4));
+                box.add(box.getComponent(5));
+                box.add(box.getComponent(1));
+                box.add(box.getComponent(2));*/
+
             }
-        });*/
-    // }
+        });
+        JButton stopButton = new JButton("Стоп");
+        stopButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        buttons.add(startButton);
+        buttons.add(Box.createHorizontalStrut(6));
+        buttons.add(stopButton);
+        return buttons;
+    }
 }
