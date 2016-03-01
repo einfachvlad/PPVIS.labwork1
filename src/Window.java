@@ -6,6 +6,41 @@ import java.awt.event.*;
 import java.util.*;
 import java.util.List;
 
+class MerryGoRound extends Thread {
+    Container[] newBoxes;
+
+    MerryGoRound(Container[] boxes) {
+        newBoxes = boxes;
+    }
+
+    public void run() {
+
+        do {
+            if (!Thread.interrupted()) {
+                for (Container box : newBoxes) {
+                    Component[] components = box.getComponents();
+                    box.removeAll();
+                    for (int current = 0, next = 1; next < components.length; current++, next++) {
+                        Component temp = components[current];
+                        components[current] = components[next];
+                        components[next] = temp;
+                    }
+                    for (Component comp : components) {
+                        box.add(comp);
+                    }
+                    box.validate();
+                }
+            } else return;
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                return;
+            }
+
+        } while (true);
+    }
+}
+
 public class Window {
     JFrame window;
     Box boxOfComponent1;
@@ -14,6 +49,7 @@ public class Window {
     Box boxOfComponent4;
     Box box51;
     int rowSize = 1;
+    static MerryGoRound mgr;
 
     Window() {
         window = new JFrame("Лабораторная работа 1");
@@ -40,7 +76,7 @@ public class Window {
     }
 
     private Box component1() {
-         boxOfComponent1 = Box.createHorizontalBox();
+        boxOfComponent1 = Box.createHorizontalBox();
         boxOfComponent1.setBorder(new TitledBorder("1-ая группа компонентов"));
         JTextField input = new JTextField(15);
         JComboBox comboBoxOfComponent1 = new JComboBox();
@@ -237,42 +273,17 @@ public class Window {
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               /* for (int current = 1, previous = 0; ; current++) {
 
-                    box1.add(textFieldOfComponent1);
-                    box1.add(Box.createHorizontalStrut(6));
-                    box1.add(comboBoxOfComponent1);
-                    box1.add(Box.createHorizontalStrut(6));
-                    box1.add(addOfComponent1);
-                }*/
-                Container[] boxes = {boxOfComponent1,boxOfComponent2,boxOfComponent3,boxOfComponent4,box51};
-                for (Container box : boxes)
-                {
-                Component[] components = box.getComponents();
-                box.removeAll();
-                for(int current=0,next=1;next<components.length;current++,next++)
-                { Component temp = components[current];
-                    components[current] = components[next];
-                    components[next] = temp;
-                }
-                for (Component comp : components) {
-                    box.add(comp);
-                }
-                box.validate();
-                }
-                /*box.
-                box.add(box.getComponent(4));
-                box.add(box.getComponent(5));
-                box.add(box.getComponent(1));
-                box.add(box.getComponent(2));*/
-
+                    Container[] boxes = {boxOfComponent1, boxOfComponent2, boxOfComponent3, boxOfComponent4, box51};
+                    mgr = new MerryGoRound(boxes);
+                    mgr.start();
             }
         });
         JButton stopButton = new JButton("Стоп");
         stopButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                mgr.interrupt();
             }
         });
         buttons.add(startButton);
