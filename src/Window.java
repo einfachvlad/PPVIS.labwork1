@@ -8,235 +8,278 @@ import java.util.List;
 
 public class Window {
     JFrame window;
-    private Box mainBox;
-    private Box box1;
-    private Box box2;
-    private Box box3;
-    private Box box4;
-    private Box box5;
-    int rowSize=1;
-    final int columnSize=2;
+    Box boxOfComponent1;
+    Box boxOfComponent2;
+    Box boxOfComponent3;
+    Box boxOfComponent4;
+    Box box51;
+    int rowSize = 1;
+
     Window() {
-        window=new JFrame("Лабораторная работа 1");
+        window = new JFrame("Лабораторная работа 1");
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         components();
         window.pack();
         window.setVisible(true);
     }
 
-   private void components() {
-        mainBox = Box.createVerticalBox();
-        component1();
-        component2();
-        component3();
-        component4();
-        component5();
-        mainBox.add(box1);
+    private void components() {
+        Box mainBox = Box.createVerticalBox();
+        mainBox.add(component1());
         mainBox.add(Box.createHorizontalStrut(12));
-        mainBox.add(box2);
+        mainBox.add(component2());
         mainBox.add(Box.createHorizontalStrut(12));
-        mainBox.add(box3);
+        mainBox.add(component3());
         mainBox.add(Box.createHorizontalStrut(12));
-        mainBox.add(box4);
+        mainBox.add(component4());
         mainBox.add(Box.createHorizontalStrut(12));
-        mainBox.add(box5);
+        mainBox.add(component5());
+        mainBox.add(extraThing());
+
         window.setContentPane(mainBox);
     }
 
-    private void component1() {
-        box1 = Box.createHorizontalBox();
-        box1.setBorder(new TitledBorder("1-ая группа компонентов"));
-        JTextField textField1 = new JTextField(15);
-        JComboBox comboBox1 = new JComboBox();
-        comboBox1.setPreferredSize(textField1.getPreferredSize());
-        JButton button1 = new JButton("Добавить");
+    private Box component1() {
+         boxOfComponent1 = Box.createHorizontalBox();
+        boxOfComponent1.setBorder(new TitledBorder("1-ая группа компонентов"));
+        JTextField input = new JTextField(15);
+        JComboBox comboBoxOfComponent1 = new JComboBox();
+        comboBoxOfComponent1.setPreferredSize(input.getPreferredSize());
         List check = new ArrayList();
-        button1.addActionListener(new ActionListener() {
+        JButton addOfComponent1 = new JButton("Добавить");
+        addOfComponent1.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent event) {
                 boolean toAdd = true;
                 for (int index = 0; index < check.size(); index++) {
-                    if (textField1.getText().equals(check.get(index).toString())) {
-                        JOptionPane.showMessageDialog(button1, "Невозможно добавить", "Информация", JOptionPane.ERROR_MESSAGE);
+                    if (input.getText().equals(check.get(index).toString())) {
+                        JOptionPane.showMessageDialog(addOfComponent1, "Невозможно добавить", "Информация", JOptionPane.ERROR_MESSAGE);
                         toAdd = false;
                     }
                 }
 
                 if (toAdd == true) {
-                    comboBox1.addItem(textField1.getText());
-                    comboBox1.setSelectedItem(textField1.getText());
-                    check.add(textField1.getText());
+                    comboBoxOfComponent1.addItem(input.getText());
+                    comboBoxOfComponent1.setSelectedItem(input.getText());
+                    check.add(input.getText());
                 }
             }
 
         });
-        box1.add(textField1);
-        box1.add(Box.createHorizontalStrut(6));
-        box1.add(comboBox1);
-        box1.add(Box.createHorizontalStrut(6));
-        box1.add(button1);
+        boxOfComponent1.add(input);
+        boxOfComponent1.add(Box.createHorizontalStrut(6));
+        boxOfComponent1.add(comboBoxOfComponent1);
+        boxOfComponent1.add(Box.createHorizontalStrut(6));
+        boxOfComponent1.add(addOfComponent1);
+        return boxOfComponent1;
     }
 
-    private void component2() {
-        box2 = Box.createHorizontalBox();
-        box2.setBorder(new TitledBorder("2-ая группа компонентов"));
-        JTextField textField2 = new JTextField(15);
-        JButton button1 = new JButton("Назвать другую кнопку");
-        JButton button2 = new JButton("Инверсия");
-        button1.addActionListener(new ActionListener() {
+    private Box component2() {
+        boxOfComponent2 = Box.createHorizontalBox();
+        boxOfComponent2.setBorder(new TitledBorder("2-ая группа компонентов"));
+        JTextField input = new JTextField(15);
+        JButton name = new JButton("Назвать другую кнопку");
+        JButton inverse = new JButton("Инверсия");
+        name.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent event) {
-                button2.setText(textField2.getText());
+                inverse.setText(input.getText());
             }
 
         });
-        button2.addActionListener(new ActionListener() {
+        inverse.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent event) {
                 String buff = new String();
-                buff = button1.getText();
-                button1.setText(button2.getText());
-                button2.setText(buff);
+                buff = name.getText();
+                name.setText(inverse.getText());
+                inverse.setText(buff);
             }
         });
-        box2.add(textField2);
-        box2.add(Box.createHorizontalStrut(6));
-        box2.add(button1);
-        box2.add(Box.createHorizontalStrut(6));
-        box2.add(button2);
+        boxOfComponent2.add(input);
+        boxOfComponent2.add(Box.createHorizontalStrut(6));
+        boxOfComponent2.add(name);
+        boxOfComponent2.add(Box.createHorizontalStrut(6));
+        boxOfComponent2.add(inverse);
+        return boxOfComponent2;
     }
 
-    private void component3(){
-        box3 = Box.createHorizontalBox();
-        box3.setBorder(new TitledBorder("3-ая группа компонентов"));
-        JTextField textField = new JTextField(10);
-        JButton button1 = new JButton("Выбрать");
-        JRadioButton radioButton1=new JRadioButton("1");
-        JRadioButton radioButton2=new JRadioButton("2");
-        JRadioButton radioButton3=new JRadioButton("3");
-        ButtonGroup buttonGroup=new ButtonGroup();
+    private Box component3() {
+        boxOfComponent3 = Box.createHorizontalBox();
+        boxOfComponent3.setBorder(new TitledBorder("3-ая группа компонентов"));
+        JTextField input = new JTextField(10);
+        JRadioButton radioButton1 = new JRadioButton("1");
+        JRadioButton radioButton2 = new JRadioButton("2");
+        JRadioButton radioButton3 = new JRadioButton("3");
+        ButtonGroup buttonGroup = new ButtonGroup();
         buttonGroup.add(radioButton1);
         buttonGroup.add(radioButton2);
         buttonGroup.add(radioButton3);
-        button1.addActionListener(new ActionListener() {
+        JButton choose = new JButton("Выбрать");
+        choose.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if(textField.getText().equals("1"))
+                if (input.getText().equals("1"))
                     radioButton1.setSelected(true);
-                else if (textField.getText().equals("2"))
+                else if (input.getText().equals("2"))
                     radioButton2.setSelected(true);
-                else if (textField.getText().equals("3"))
+                else if (input.getText().equals("3"))
                     radioButton3.setSelected(true);
-                else JOptionPane.showMessageDialog(button1, "Нет такого переключателя", "Информация", JOptionPane.ERROR_MESSAGE);
+                else
+                    JOptionPane.showMessageDialog(choose, "Нет такого переключателя", "Информация", JOptionPane.ERROR_MESSAGE);
             }
         });
-        box3.add(textField);
-        box3.add(Box.createHorizontalStrut(6));
-        box3.add(button1);
-        box3.add(Box.createHorizontalStrut(6));
-        box3.add(radioButton1);
-        box3.add(radioButton2);
-        box3.add(radioButton3);
-
+        boxOfComponent3.add(input);
+        boxOfComponent3.add(Box.createHorizontalStrut(6));
+        boxOfComponent3.add(choose);
+        boxOfComponent3.add(Box.createHorizontalStrut(6));
+        boxOfComponent3.add(radioButton1);
+        boxOfComponent3.add(radioButton2);
+        boxOfComponent3.add(radioButton3);
+        return boxOfComponent3;
     }
 
-    private void component4(){
-        box4 = Box.createHorizontalBox();
-        box4.setBorder(new TitledBorder("4-ая группа компонентов"));
-        JTextField textField = new JTextField(10);
-        JButton button1 = new JButton("Выбрать");
-        JCheckBox checkBox1=new JCheckBox("1");
-        JCheckBox checkBox2=new JCheckBox("2");
-        JCheckBox checkBox3=new JCheckBox("3");
-        button1.addActionListener(new ActionListener() {
+    private Box component4() {
+        boxOfComponent4 = Box.createHorizontalBox();
+        boxOfComponent4.setBorder(new TitledBorder("4-ая группа компонентов"));
+        JTextField input = new JTextField(10);
+        JCheckBox checkBox1 = new JCheckBox("1");
+        JCheckBox checkBox2 = new JCheckBox("2");
+        JCheckBox checkBox3 = new JCheckBox("3");
+        JButton choose = new JButton("Выбрать");
+        choose.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if(textField.getText().equals("1")) {
-                    if(checkBox1.isSelected())
-                        checkBox1.setSelected(false);
-                    else checkBox1.setSelected(true);
-                }
-                else if (textField.getText().equals("2"))
-                {
-                    if(checkBox2.isSelected())
-                        checkBox2.setSelected(false);
-                    else checkBox2.setSelected(true);
-                }
-                else if (textField.getText().equals("3"))
-                {
-                    if(checkBox3.isSelected())
-                        checkBox3.setSelected(false);
-                    else checkBox3.setSelected(true);
-                }
-                else JOptionPane.showMessageDialog(button1, "Нет такого флажка", "Информация", JOptionPane.ERROR_MESSAGE);
+                if (input.getText().equals("1"))
+                    checkBox1.setSelected(!checkBox1.isSelected());
+                else if (input.getText().equals("2"))
+                    checkBox2.setSelected(!checkBox2.isSelected());
+                else if (input.getText().equals("3"))
+                    checkBox3.setSelected(!checkBox3.isSelected());
+                else
+                    JOptionPane.showMessageDialog(choose, "Нет такого флажка", "Информация", JOptionPane.ERROR_MESSAGE);
             }
         });
-        box4.add(textField);
-        box4.add(Box.createHorizontalStrut(6));
-        box4.add(button1);
-        box4.add(Box.createHorizontalStrut(6));
-        box4.add(checkBox1);
-        box4.add(checkBox2);
-        box4.add(checkBox3);
-
+        boxOfComponent4.add(input);
+        boxOfComponent4.add(Box.createHorizontalStrut(6));
+        boxOfComponent4.add(choose);
+        boxOfComponent4.add(Box.createHorizontalStrut(6));
+        boxOfComponent4.add(checkBox1);
+        boxOfComponent4.add(checkBox2);
+        boxOfComponent4.add(checkBox3);
+        return boxOfComponent4;
     }
 
-    private void component5(){
-        box5 = Box.createVerticalBox();
-        Box box51=Box.createHorizontalBox();
-        Box box52=Box.createHorizontalBox();
-        box5.setBorder(new TitledBorder("5-ая группа компонентов"));
-        JTextField textField = new JTextField(10);
-        JButton button1 = new JButton("Занести");
-        JButton button2 = new JButton("Перенести в В");
-        JButton button3 = new JButton("Перенести в А");
-        DefaultTableModel model = new DefaultTableModel(rowSize,columnSize);
-        JTable table=new JTable(model);
-        Dimension dimension=new Dimension(box52.getWidth(),table.getRowHeight()*5);
-       // table.setMinimumSize(dimension);
-        button1.addActionListener(new ActionListener() {
+    private Box component5() {
+        Box boxOfComponent5 = Box.createVerticalBox();
+        box51 = Box.createHorizontalBox();
+        Box box52 = Box.createHorizontalBox();
+        boxOfComponent5.setBorder(new TitledBorder("5-ая группа компонентов"));
+        DefaultTableModel model = new DefaultTableModel(rowSize, 2);
+        JTable table = new JTable(model);
+        Dimension dimension = new Dimension(box52.getWidth(), table.getRowHeight() * 5);
+        JTextField input = new JTextField(10);
+        JButton add = new JButton("Занести");
+        add.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                table.setValueAt(textField.getText(),rowSize-1,0);
-                textField.setText("");
-                model.addRow(new Object[]{"",""});
+
+                table.setValueAt(input.getText(), rowSize - 1, 0);
+                input.setText("");
+                model.addRow(new Object[]{"", ""});
                 rowSize++;
             }
         });
-        button2.addActionListener(new ActionListener() {
+        JButton toB = new JButton("Перенести в В");
+        toB.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                int[] selectedRows=table.getSelectedRows();
-                for(int row=0;row<selectedRows.length;row++)
-                {
-                    table.setValueAt(table.getValueAt(selectedRows[row],0),selectedRows[row],1);
-                    table.setValueAt("",selectedRows[row],0);
+                int[] selectedRows = table.getSelectedRows();
+                for (int row = 0; row < selectedRows.length; row++) {
+                    if (table.getValueAt(selectedRows[row], 0) != "") {
+                        table.setValueAt(table.getValueAt(selectedRows[row], 0), selectedRows[row], 1);
+                        table.setValueAt("", selectedRows[row], 0);
+                    }
                 }
 
             }
         });
-        button3.addActionListener(new ActionListener() {
+        JButton toA = new JButton("Перенести в А");
+        toA.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                int[] selectedRows=table.getSelectedRows();
-                for(int row=0;row<selectedRows.length;row++)
-                {
-                    table.setValueAt(table.getValueAt(selectedRows[row],1),selectedRows[row],0);
-                    table.setValueAt("",selectedRows[row],1);
+                int[] selectedRows = table.getSelectedRows();
+                for (int row = 0; row < selectedRows.length; row++) {
+                    if (table.getValueAt(selectedRows[row], 1) != "") {
+                        table.setValueAt(table.getValueAt(selectedRows[row], 1), selectedRows[row], 0);
+                        table.setValueAt("", selectedRows[row], 1);
+                    }
                 }
 
             }
         });
-        box51.add(textField);
+        box51.add(input);
         box51.add(Box.createHorizontalStrut(6));
-        box51.add(button1);
+        box51.add(add);
         box51.add(Box.createHorizontalStrut(6));
-        box51.add(button2);
+        box51.add(toB);
         box51.add(Box.createHorizontalStrut(6));
-        box51.add(button3);
+        box51.add(toA);
         box51.add(Box.createHorizontalStrut(6));
-        box5.add(box51);
-        box5.add(Box.createVerticalStrut(6));
-        JScrollPane scrollPane=new JScrollPane(table);
+        boxOfComponent5.add(box51);
+        boxOfComponent5.add(Box.createVerticalStrut(6));
+        JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setPreferredSize(dimension);
         box52.add(scrollPane);
-        box5.add(box52);
+        boxOfComponent5.add(box52);
+        return boxOfComponent5;
+    }
 
+    //нужно сделать карусель компонентов в группах: старт - запуск карусели, конец - остановить
+    private Box extraThing() {
+        Box buttons = Box.createHorizontalBox();
+        JButton startButton = new JButton("Старт");
+        startButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               /* for (int current = 1, previous = 0; ; current++) {
 
+                    box1.add(textFieldOfComponent1);
+                    box1.add(Box.createHorizontalStrut(6));
+                    box1.add(comboBoxOfComponent1);
+                    box1.add(Box.createHorizontalStrut(6));
+                    box1.add(addOfComponent1);
+                }*/
+                Container[] boxes = {boxOfComponent1,boxOfComponent2,boxOfComponent3,boxOfComponent4,box51};
+                for(int i=0;i<3;i++){
+                for (Container box : boxes)
+                {
+                Component[] components = box.getComponents();
+                box.removeAll();
+                for(int current=0,next=1;next<components.length;current++,next++)
+                { Component temp = components[current];
+                    components[current] = components[next];
+                    components[next] = temp;
+                }
+                for (Component comp : components) {
+                    box.add(comp);
+                }
+                    box.validate();
+                    for(int j=0;j<1000;j++);
+                }}
+                /*box.
+                box.add(box.getComponent(4));
+                box.add(box.getComponent(5));
+                box.add(box.getComponent(1));
+                box.add(box.getComponent(2));*/
+
+            }
+        });
+        JButton stopButton = new JButton("Стоп");
+        stopButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        buttons.add(startButton);
+        buttons.add(Box.createHorizontalStrut(6));
+        buttons.add(stopButton);
+        return buttons;
     }
 }
